@@ -4,10 +4,19 @@ import { FaArrowRight } from "react-icons/fa6";
 
 import styled from 'styled-components';
 
-const Button = () => {
+const Button = ({setSelectedLink}) => {
+   const handleClick = (e) => {
+        e.preventDefault();
+
+        setSelectedLink("#projects");
+
+        document.querySelector("#projects").scrollIntoView({
+            behavior: 'smooth'
+        });
+    };
   return (
     <StyledWrapper>
-      <Link href={"#projects"} className="button flex items-center justify-center"> 
+      <Link href={"#projects"} className="button flex items-center justify-center" onClick={handleClick}> 
         See my work
         <FaArrowRight className="ml-2 transform -rotate-45" />
       </Link>

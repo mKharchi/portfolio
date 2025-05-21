@@ -1,13 +1,16 @@
 'use client'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const NavLink = ({ label, href, selectedLink, setSelectedLink }) => {
+    // Handle click event
+   
     const handleClick = (e) => {
         e.preventDefault();
 
         setSelectedLink(href);
-        
+        // Scroll to the section        
+
         document.querySelector(href).scrollIntoView({
             behavior: 'smooth'
         });
@@ -28,13 +31,15 @@ const NavLink = ({ label, href, selectedLink, setSelectedLink }) => {
     )
 }
 
-const NavBar = () => {
-    const [selectedLink, setSelectedLink] = React.useState("#about");
-    
+const NavBar = ({ selectedLink, setSelectedLink }) => {
+
+
+
+
     const navLinks = [
         { label: "About", href: "#about" },
         { label: "Projects", href: "#projects" },
-        { label: "Testimonials", href: "#testimonials" },
+        { label: "My approach", href: "#my_approach" },
         { label: "Contact", href: "#contact" },
     ]
 
