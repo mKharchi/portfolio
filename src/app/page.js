@@ -8,6 +8,7 @@ import Projects from "@/components/Projects";
 import Testimonials from "@/components/Testimonials";
 import MyApproach from '@/components/MyApproach';
 import Contact from "@/components/Contact";
+import Footer from '@/components/Footer';
 
 export default function Home() {
 
@@ -41,6 +42,8 @@ const [selectedLink, setSelectedLink] = useState("#about");
       <section id="contact" className="snap-start w-full">
         <Contact />
       </section>
+
+      <Footer />
       {/* Add other sections with the same pattern */}
     </div>
   )
