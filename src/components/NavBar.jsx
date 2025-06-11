@@ -1,19 +1,15 @@
 'use client'
 import Link from 'next/link'
-import React, { useEffect } from 'react'
-
-const NavLink = ({ label, href, selectedLink, setSelectedLink }) => {
-    // Handle click event
-   
+import React, { useState } from 'react'
+import Image from 'next/image'
+const NavLink = ({ label, href, selectedLink, setSelectedLink, onClick }) => {
     const handleClick = (e) => {
         e.preventDefault();
-
         setSelectedLink(href);
-        // Scroll to the section        
-
         document.querySelector(href).scrollIntoView({
             behavior: 'smooth'
         });
+        if (onClick) onClick(); // Close mobile menu if needed
     };
 
     return (
@@ -32,9 +28,7 @@ const NavLink = ({ label, href, selectedLink, setSelectedLink }) => {
 }
 
 const NavBar = ({ selectedLink, setSelectedLink }) => {
-
-
-
+    const [menuOpen, setMenuOpen] = useState(false);
 
     const navLinks = [
         { label: "About", href: "#about" },
@@ -45,21 +39,47 @@ const NavBar = ({ selectedLink, setSelectedLink }) => {
 
     return (
         <nav 
-            className="fixed py-5 px-10 rounded-xl top-5 sm:top-10 flex justify-center gap-14 items-center"
-            style={{
-                background: "linear-gradient(90deg, #04071D 0%, #0C0E23 100%)",
-                backdropFilter: "blur(10px)",
-                boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
-            }}
+            className="fixed z-50 top-5 left-0 w-full px-4 flex justify-center items-center"
         >
-            {navLinks.map((link) => (
-                <NavLink 
-                    key={link.label} 
-                    {...link} 
-                    selectedLink={selectedLink} 
-                    setSelectedLink={setSelectedLink} 
-                />
-            ))}
+            {/* Desktop Nav */}
+            <div className="hidden sm:flex py-5 px-10 rounded-xl mt-5 gap-14 items-center">
+                {navLinks.map((link) => (
+                    <NavLink 
+                        key={link.label} 
+                        {...link} 
+                        selectedLink={selectedLink} 
+                        setSelectedLink={setSelectedLink} 
+                    />
+                ))}
+            </div>
+            {/* Mobile Nav */}
+            <div className="flex sm:hidden bg-background w-full justify-between items-center px-6 mx-0 py-4 rounded-xl">
+                <span className="text-white font-bold text-lg">
+                    <Image width={256} height={256} className='bg-white object-cover rounded-full w-8 h-8' src={"/m.svg"} />
+                </span>
+                <button
+                    aria-label="Open navigation menu"
+                    className="text-white focus:outline-none"
+                    onClick={() => setMenuOpen(!menuOpen)}
+                >
+                    <svg width="28" height="28" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" strokeWidth="2" strokeLinecap="round" d="M4 7h16M4 12h16M4 17h16"/>
+                    </svg>
+                </button>
+            </div>
+            {menuOpen && (
+                <div className="absolute top-16 right-10 w-[40vw] max-w-xs bg-[#04071D] rounded-xl shadow-lg flex flex-col items-center gap-6 py-8 sm:hidden z-50">
+                    {navLinks.map((link) => (
+                        <NavLink 
+                            key={link.label} 
+                            {...link} 
+                            selectedLink={selectedLink} 
+                            setSelectedLink={setSelectedLink} 
+                            onClick={() => setMenuOpen(false)}
+                        />
+                    ))}
+                </div>
+            )}
         </nav>
     )
 }

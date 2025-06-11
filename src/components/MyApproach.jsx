@@ -39,9 +39,9 @@ const MyApproach = () => {
 ]
 
     return (
-        <div className="w-[80%] h-screen p-4 sm:px-20 sm:py-42 mx-auto  flex flex-col gap-4 sm:gap-14 items-center justify-center">
-            <h2 className="text-4xl font-bold">My <span className="text-[#CBACF9]">approach</span></h2>
-            <div className="w-[80%] h-full flex gap-4 justify-center sm:gap-8">
+        <div className="w-full my-40 sm:my-0 sm:w-[80%] min-h-screen p-4 sm:px-20 sm:py-42 mx-auto  flex flex-col gap-10 sm:gap-14 items-center justify-center">
+            <h2 className="text-2xl sm:text-4xl font-bold">My <span className="text-[#CBACF9]">approach</span></h2>
+            <div className="w-full p-1 sm:w-[80%] relative h-full flex flex-col sm:flex-row gap-8 justify-center sm:gap-8">
                 {steps.map(el => (
                     <Card frontText={`Phase ${el.no}`} backText={el.backText} key={el.no} />
                 ))}
