@@ -8,11 +8,11 @@ const ProjectBox = ({ project }) => {
   // Motion values for 3D tilt effect
   const x = useMotionValue(0.5);
   const y = useMotionValue(0.5);
-  
+
   // Transform mouse position to rotation values
   const rotateX = useTransform(y, [0, 1], [10, -10]);
   const rotateY = useTransform(x, [0, 1], [-10, 10]);
-  
+
   // For shadow and highlight effects
   const diagonalMovement = useTransform(
     [x, y],
@@ -63,7 +63,7 @@ const ProjectBox = ({ project }) => {
           opacity: sheenOpacity,
         }}
       />
-      
+
       <motion.div
         className="w-full"
         style={{
@@ -78,8 +78,8 @@ const ProjectBox = ({ project }) => {
           className="sm:w-full w-[90%] mx-auto object-center h-[200px] sm:h-[320px]  sm:min-h-[30vh] object-cover  rounded-lg mb-4"
         />
       </motion.div>
-      
-      <motion.div 
+
+      <motion.div
         className="flex flex-col items-start justify-between gap-2  w-[90%] my-auto sm:w-full h-2/3 sm:h-full"
         style={{
           transform: "translateZ(10px)",
@@ -91,8 +91,8 @@ const ProjectBox = ({ project }) => {
         <div className="w-full flex justify-between px-0 items-center">
           <div className="flex flex-wrap gap-2">
             {project.technologies.map((TechIcon, index) => (
-              <motion.div 
-                key={index} 
+              <motion.div
+                key={index}
                 className="flex items-center"
                 whileHover={{ scale: 1.2, y: -2 }}
                 transition={{ type: "spring", stiffness: 300 }}
@@ -105,10 +105,10 @@ const ProjectBox = ({ project }) => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Link 
+            <Link
               target="_blank"
-              href={project.link} 
-              rel="noopener noreferrer" 
+              href={project.link}
+              rel="noopener noreferrer"
               className="text-[#cbacf9] text-right text-sm sm:text-lg hover:text-blue-500 transition duration-200"
             >
               View Project
@@ -120,49 +120,9 @@ const ProjectBox = ({ project }) => {
   );
 };
 
-import { RiTailwindCssFill } from "react-icons/ri";
-import { SiNextdotjs } from "react-icons/si";
-import { TbBrandThreejs } from "react-icons/tb";
-import { SiMongodb } from "react-icons/si";
-import { FaStripe } from "react-icons/fa6";
-import { SiExpress } from "react-icons/si";
-const Projects = () => {
-  const projects = [
-    {
-      id: 1,
-      title: "Traveleo",
-      description: "A collaborative project about a travel agency website with hotel and trip browsing and booking, direct messaging and much more...",
-      link: "https://github.com/Dali-MDB/Escapeo",
-      image: "/project1.png",
-      technologies: [FaReact, SiNextdotjs, RiTailwindCssFill]
-    },
-    {
-      id: 2,
-      title: "Forever",
-      description: "A fully functional MERN e-commerce website offering multiple functionalities such as ordering searching and a lot more + An admin panel for all the products and orders amanging",
-      link: "https://ecommerce-forever-frontend.vercel.app/",
-      image: "/project2.png",
-      technologies: [ FaReact,SiMongodb, RiTailwindCssFill , SiExpress  , FaStripe ]
-    },
-  ];
 
-  return (
-    <motion.div 
-      className="w-[80%] min-h-screen p-0 sm:px-20 sm:py-42 mx-auto flex flex-col gap-10 sm:gap-14 items-center justify-center my-12"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.2 }}
-    >
-      <motion.h2 
-        className="text-2xl sm:text-4xl text-center font-bold"
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        A small selection of my <span className="text-[#CBACF9]">recent projects</span>
-      </motion.h2>
-      
-      <motion.div 
+/**
+ *  <motion.div 
         className="w-full  sm:w-[80%] h-full  flex flex-col sm:flex-row gap-12 sm:gap-8"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -172,6 +132,81 @@ const Projects = () => {
           <ProjectBox key={project.id} project={project} />
         ))}
       </motion.div>
+ */
+
+import { RiTailwindCssFill } from "react-icons/ri";
+import { SiNextdotjs } from "react-icons/si";
+import { TbBrandThreejs } from "react-icons/tb";
+import { SiMongodb } from "react-icons/si";
+import { FaStripe } from "react-icons/fa6";
+import { SiExpress } from "react-icons/si";
+import Card from "./Card";
+const Projects = () => {
+const projects = [
+  {
+    id: 1,
+    title: "Traveleo",
+    description: "A collaborative project about a travel agency website with hotel and trip browsing and booking, direct messaging and much more...",
+    link: "https://github.com/Dali-MDB/Escapeo",
+    image: "/project1.png",
+    technologies: [<FaReact size={24} />, <SiNextdotjs size={24} />, <RiTailwindCssFill size={24} />]
+  },
+  {
+    id: 2,
+    title: "Forever",
+    description: "A fully functional MERN e-commerce website offering multiple functionalities such as ordering searching and a lot more + An admin panel for all the products and orders amanging",
+    link: "https://ecommerce-forever-frontend.vercel.app/",
+    image: "/project2.png",
+    technologies: [<FaReact size={24} />, <SiMongodb size={24} />, <RiTailwindCssFill size={24} />, <SiExpress size={24} />, <FaStripe size={24} />]
+  }, 
+  {
+    id: 3,
+    title: "In-house",
+    description: "A comprehensive real estate platform featuring property browsing with detailed listings, interactive search filters, and property management tools. Includes a full admin panel for adding and managing properties, plus informative sections about the real estate company's services and expertise.",
+    link: "https://in-house-alpha.vercel.app/",
+    image: "/project3.png",
+    technologies: [<FaReact size={24} />, <SiMongodb size={24} />, <RiTailwindCssFill size={24} />, <SiExpress size={24} />]
+  }, 
+  {
+    id: 4,
+    title: "FoodMart",
+    description: "A modern restaurant website combining informative content about the establishment with seamless reservation functionality. Features table management system, reservation booking interface, and a comprehensive admin panel for managing tables, reservations, and restaurant operations.",
+    link: "https://food-mart-eta-flax.vercel.app/",
+    image: "/project4.png",
+    technologies: [<FaReact size={24} />, <SiMongodb size={24} />, <RiTailwindCssFill size={24} />, <SiExpress size={24} />]
+  }, 
+  {
+    id: 5,
+    title: "Stylicle",
+    description: "An elegant beauty salon website showcasing services, treatments, and salon expertise. Features detailed information about beauty treatments, salon atmosphere, staff profiles, and service offerings to help clients discover and learn about the salon's premium beauty services.",
+    link: "https://github.com/Dali-MDB/Escapeo",
+    image: "/project5.png",
+    technologies: [<FaReact size={24} />, <SiMongodb size={24} />, <RiTailwindCssFill size={24} />, <SiExpress size={24} />]
+  },
+];
+
+  return (
+    <motion.div
+      className="w-[80%] min-h-screen p-0 sm:px-20 sm:py-42 mx-auto flex flex-col gap-10 sm:gap-14 items-center justify-center my-24 sm:my-12"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.2 }}
+    >
+      <motion.h2
+        className="text-2xl sm:text-4xl text-center font-bold"
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        A small selection of my <span className="text-[#CBACF9]">recent projects</span>
+      </motion.h2>
+      <div
+        className="w-full  h-full  grid grid-cols-1 xl:grid-cols-2  2xl:grid-cols-3 place-items-center gap-8 sm:gap-8 xl:gap-12 2xl:gap-10"
+      >
+        {projects.map((project) => (
+          <Card key={project.id} {...project} />
+        ))}
+      </div>
     </motion.div>
   );
 };
