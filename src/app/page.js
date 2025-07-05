@@ -1,5 +1,5 @@
 'use client'
-import { useEffect , useState } from 'react';
+import { useEffect , useRef, useState } from 'react';
 
 
 import NavBar from "@/components/NavBar";
@@ -9,6 +9,13 @@ import Testimonials from "@/components/Testimonials";
 import MyApproach from '@/components/MyApproach';
 import Contact from "@/components/Contact";
 import Footer from '@/components/Footer';
+import { useGSAP } from '@gsap/react';
+
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/dist/ScrollTrigger';
+
+
+gsap.registerPlugin(ScrollTrigger)
 
 export default function Home() {
 
@@ -24,8 +31,8 @@ const [selectedLink, setSelectedLink] = useState("#about");
     }
   };
 
-
-
+  const containerRef = useRef()
+ 
 //  put the link state here and pass it as props to the NavBar component
   return (
     <div className="w-full min-h-screen h-full relative overflow-x-hidden flex flex-col items-center snap-y snap-mandatory">
