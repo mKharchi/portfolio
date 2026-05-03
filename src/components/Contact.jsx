@@ -112,7 +112,7 @@ const Contact = () => {
   }, [])
 
   return (
-    <div ref={containerRef} className="sm:w-[80%] gap-10 sm:gap-0 my-20 w-full h-full min-h-screen mx-auto p-4 sm:p-0 flex flex-col sm:flex-row justify-start sm:justify-center items-center">
+    <div ref={containerRef} className="md:w-[80%] gap-10  my-20 w-full h-full min-h-screen mx-auto p-4 sm:p-0 flex flex-col md:flex-row justify-start sm:justify-center items-center">
       <h2 ref={titleRef} className="text-2xl sm:text-4xl w-[90%] sm:w-1/2 font-bold">
         Ready to take <span className='text-[#CBACF9]'>your</span> digital presence to the next level?
       </h2>

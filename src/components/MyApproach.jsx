@@ -105,11 +105,11 @@ const MyApproach = () => {
   }, [])
 
   return (
-    <div ref={containerRef} className="w-full my-40 sm:my-0 sm:w-[80%] min-h-screen p-4 sm:px-20 sm:py-42 mx-auto flex flex-col gap-10 sm:gap-14 items-center justify-center">
+    <div ref={containerRef} className="w-full my-40 sm:my-0 md:w-[80%] min-h-screen p-4 sm:px-20 sm:py-42 mx-auto flex flex-col gap-10 sm:gap-14 items-center justify-center">
       <h2 ref={titleRef} className="text-2xl sm:text-4xl font-bold">
         My <span className="text-[#CBACF9]">approach</span>
       </h2>
-      <div className="w-full p-1 sm:w-[80%] relative h-full flex flex-col sm:flex-row gap-8 justify-center items-center sm:gap-8">
+      <div className="w-full p-1 sm:w-[80%] relative h-full grid grid-cols-1 md:grid-cols-2  gap-8 place-items-center  sm:gap-8">
         {steps.map(el => (
           <Card frontText={`Phase ${el.no}`} backText={el.backText} key={el.no} />
         ))}
