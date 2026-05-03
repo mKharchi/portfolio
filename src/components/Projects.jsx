@@ -225,7 +225,7 @@ const Projects = () => {
   return (
     <motion.div
       ref={containerRef}
-      className="w-full md:w-[80%] min-h-screen p-0 sm:px-20 sm:py-42 mx-auto flex flex-col gap-10 sm:gap-14 items-center justify-center my-24 sm:my-12"
+      className="w-full  min-h-screen p-0 sm:px-20 sm:py-42 mx-auto flex flex-col gap-10 sm:gap-14 items-center justify-center my-24 sm:my-12"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.2 }}
@@ -240,7 +240,7 @@ const Projects = () => {
         <h3 className="text-xl sm:text-2xl text-center font-semibold mb-6 text-gray-300">
           Fullstack Projects
         </h3>
-        <div className="w-full h-full grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 place-items-center gap-8 sm:gap-8 xl:gap-12 2xl:gap-10">
+        <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center gap-8  md:gap-10">
           {fullstackProjects.slice(0, visibleCount).map((project, index) => (
             <Card key={project.id} delay={index * 0.08} {...project} />
           ))}
@@ -277,9 +277,12 @@ const Projects = () => {
         <h3 className="text-xl sm:text-2xl text-center font-semibold mb-6 text-gray-300">
           Backend Projects
         </h3>
-        <div className="w-full h-full grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 place-items-center gap-8 sm:gap-8 xl:gap-12 2xl:gap-10">
+        <div className="w-full h-full flex flex-col md:flex-row  gap-8 sm:gap-8 xl:gap-12 2xl:gap-10">
+          
           {backendProjects.map((project, index) => (
-            <Card key={project.id} delay={index * 0.08} {...project} />
+          <div key={project.id} className="w-full px-20 relative h-full flex justify-center items-center"> 
+             <Card  delay={index * 0.08} {...project} />
+          </div>
           ))}
         </div>
       </div>

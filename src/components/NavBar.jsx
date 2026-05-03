@@ -17,7 +17,7 @@ const NavLink = ({ label, href, selectedLink, setSelectedLink, onClick }) => {
         <Link 
             href={href}
             onClick={handleClick}
-            className={`text-sm sm:text-base md:text-md font-inter font-medium transition duration-300 ease-in-out ${
+            className={`text-sm  font-inter font-medium transition duration-300 ease-in-out ${
                 selectedLink === href
                     ? 'text-[#F0F0F0] font-semibold'
                     : 'hover:text-[#F0F0F0] text-white/80'
