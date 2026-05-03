@@ -19,7 +19,7 @@ const Card = ({ title, technologies, description, image, link, delay = 0 }) => {
       whileTap={{ scale: 0.99 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.45, ease: "easeOut", delay }}
-      className={`card shadow-[0px_4px_16px_rgba(54,126,8,0.3)] ${isExpanded ? "h-[450px]" : hasImage ? "h-[430px]" : "h-[260px]"} w-full group gap-2 rounded-lg relative flex justify-end flex-col p-4 pt-6 z-50 overflow-hidden bg-gradient-to-b from-gray-800 to-gray-900 transition-all duration-300`}
+      className={`card shadow-[0px_4px_16px_rgba(54,126,8,0.3)] ${isExpanded ? "h-[450px]" : hasImage ? "h-[430px]" : "h-[260px]"} w-11/12 md:w-full group gap-2 rounded-lg relative flex justify-end flex-col p-4 pt-6 z-50 overflow-hidden bg-gradient-to-b from-gray-800 to-gray-900 transition-all duration-300`}
     >
       {/* Background overlay */}
       <div className="absolute inset-0 bg-black/20 rounded-lg" />

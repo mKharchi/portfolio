@@ -280,7 +280,7 @@ const Projects = () => {
         <div className="w-full h-full flex flex-col md:flex-row  gap-8 sm:gap-8 xl:gap-12 2xl:gap-10">
           
           {backendProjects.map((project, index) => (
-          <div key={project.id} className="w-full px-20 relative h-full flex justify-center items-center"> 
+          <div key={project.id} className="w-full  md:px-20 relative h-full flex justify-center items-center"> 
              <Card  delay={index * 0.08} {...project} />
           </div>
           ))}
