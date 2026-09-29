@@ -205,7 +205,7 @@ const Projects = () => {
           </h3>
           <span className="h-px w-8 sm:w-16 bg-gradient-to-l from-transparent to-[#CBACF9]/60" />
         </div>
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 px-4 sm:px-0 justify-items-center">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2  gap-4 px-4 sm:px-0 justify-items-center">
           {featuredProjects.map((project) => (
             <Card key={project.id} {...project} />
           ))}
@@ -217,7 +217,7 @@ const Projects = () => {
         <h3 className="text-xl sm:text-2xl text-center font-semibold mb-6 text-gray-300">
           Frontend Projects
         </h3>
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 px-4 sm:px-0 justify-items-center">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-2 gap-4 px-4 sm:px-0 justify-items-center">
           {frontendProjects.map((project) => (
             <Card key={project.id} {...project} />
           ))}
@@ -229,7 +229,7 @@ const Projects = () => {
         <h3 className="text-xl sm:text-2xl text-center font-semibold mb-6 text-gray-300">
           Fullstack Projects
         </h3>
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 px-4 sm:px-0 justify-items-center">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-2 gap-4 px-4 sm:px-0 justify-items-center">
           {fullstackProjects.map((project) => (
             <Card key={project.id} {...project} />
           ))}
@@ -241,7 +241,7 @@ const Projects = () => {
         <h3 className="text-xl sm:text-2xl text-center font-semibold mb-6 text-gray-300">
           Backend &amp; AI Projects
         </h3>
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 px-4 sm:px-0 justify-items-center">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4 px-4 sm:px-0 justify-items-center">
           {backendAiProjects.map((project) => (
             <Card key={project.id} {...project} />
           ))}

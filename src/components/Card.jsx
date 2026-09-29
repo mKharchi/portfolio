@@ -18,7 +18,7 @@ const Card = ({
     }`}
   >
     {/* ── Left zone: identity ── */}
-    <div className="relative flex flex-col justify-between gap-6 bg-gradient-to-br from-[#1a0f2e] to-[#2a1650] p-6 sm:w-2/5 sm:min-w-[160px]">
+    <div className="relative flex flex-col justify-between gap-6 bg-gradient-to-bl to-[#1a0f2e] via-transparent from-[#2a1650] p-6 sm:w-2/5 sm:min-w-[160px]">
       {/* Featured badge */}
       {featured && (
         <span className="absolute bottom-6 right-3 rounded-full bg-[#CBACF9] px-2.5 py-0.5 text-[10px] font-bold tracking-wide text-gray-900 shadow">

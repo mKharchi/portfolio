@@ -95,7 +95,7 @@ const Contact = () => {
   });
 
   return (
-    <div className="w-full min-h-screen mx-auto px-6  py-24 flex flex-col items-start justify-center gap-10 max-w-4xl">
+    <div className="w-full min-h-screen mx-auto px-6 -mt-32 pb-24 flex flex-col items-start justify-center gap-10 max-w-4xl">
       {/* Heading block */}
       <div className="flex text-center flex-col items-center w-full gap-2">
         <h2 className="text-3xl sm:text-4xl font-bold text-white  leading-tight">
