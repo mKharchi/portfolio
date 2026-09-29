@@ -1,87 +1,17 @@
 "use client";
+
 import Link from "next/link";
-import { FaArrowRight } from "react-icons/fa6";
 
-import styled from "styled-components";
-
-const Button = ({ setSelectedLink }) => {
-  const handleClick = (e) => {
-    e.preventDefault();
-
-    setSelectedLink("#projects");
-
-    document.querySelector("#projects").scrollIntoView({
-      behavior: "smooth",
-    });
-  };
-  return (
-    <StyledWrapper>
-      <Link
-        href={"#projects"}
-        className="button flex items-center justify-center"
-        onClick={handleClick}
-      >
-        See my projects
-        <FaArrowRight className="ml-2 transform -rotate-45" />
-      </Link>
-    </StyledWrapper>
-  );
-};
-
-const StyledWrapper = styled.div`
-  .button {
-    --green: #161a31;
-    align-items: center;
-    font-size: 15px;
-    padding: 1em 2.9em;
-    letter-spacing: 0.06em;
-    position: relative;
-    font-family: inherit;
-    border-radius: 0.6em;
-    overflow: hidden;
-    transition: all 0.3s;
-    line-height: 1.4em;
-    background: linear-gradient(
-      45deg,
-      #161a31 0%,
-      transparent 40%,
-      transparent 60%,
-      #06091f 100%
-    );
-    color: #efefef;
-    display: flex;
-    box-shadow:
-      inset 0 0 10px #161a31,
-      0 0 9px 3px #06091f;
-  }
-  // set the colors as above
-  .button:hover {
-    color: #82ffc9;
-    box-shadow:
-      inset 0 0 10px #161a31,
-      0 0 9px 3px #06091f;
-  }
-
-  .button:before {
-    content: "";
-    position: absolute;
-    left: -4em;
-    width: 4em;
-    height: 100%;
-    top: 0;
-    transition: transform 0.4s ease-in-out;
-    background: linear-gradient(
-      to right,
-      transparent 1%,
-      rgba(27, 253, 156, 0.1) 40%,
-      rgba(27, 253, 156, 0.1) 60%,
-      transparent 100%
-    );
-  }
-
-  .button:hover:before {
-    transform: translateX(15em);
-  }
-`;
+const Button = () => (
+  <Link
+    href="#projects"
+    className="inline-flex items-center justify-center rounded-lg bg-[#161a31] px-7 py-4 text-[15px] tracking-wide text-[#efefef] shadow-[inset_0_0_10px_#161a31,0_0_9px_3px_#06091f] transition-colors duration-150 hover:text-[#82ffc9]"
+  >
+    See my projects
+    <svg className="ml-2 h-4 w-4 -rotate-45" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  </Link>
+);
 
 export default Button;

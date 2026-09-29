@@ -1,141 +1,92 @@
-import { motion } from "framer-motion";
-import Image from "next/image";
+"use client";
+
 import Link from "next/link";
-import React, { useState } from "react";
 
-const Card = ({ title, technologies, description, image, link, delay = 0 }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const hasImage = image !== null && image !== undefined;
+const Card = ({
+  title,
+  technologies,
+  description,
+  link,
+  role,
+  featured = false,
+}) => (
+  <article
+    className={`project-card relative w-11/12 md:w-full rounded-2xl overflow-hidden flex flex-col sm:flex-row transition-transform duration-200 ease-out hover:-translate-y-1 ${
+      featured
+        ? "ring-1 ring-[#CBACF9]/50 shadow-[0_8px_32px_rgba(203,172,249,0.18)]"
+        : "shadow-[0_4px_16px_rgba(0,0,0,0.35)]"
+    }`}
+  >
+    {/* ── Left zone: identity ── */}
+    <div className="relative flex flex-col justify-between gap-6 bg-gradient-to-br from-[#1a0f2e] to-[#2a1650] p-6 sm:w-2/5 sm:min-w-[160px]">
+      {/* Featured badge */}
+      {featured && (
+        <span className="absolute bottom-6 right-3 rounded-full bg-[#CBACF9] px-2.5 py-0.5 text-[10px] font-bold tracking-wide text-gray-900 shadow">
+          ★ Latest
+        </span>
+      )}
 
-  const toggleExpanded = () => {
-    setIsExpanded(!isExpanded);
-  };
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30, scale: 0.98 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      whileHover={{ y: -6, scale: 1.01 }}
-      whileTap={{ scale: 0.99 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.45, ease: "easeOut", delay }}
-      className={`card shadow-[0px_4px_16px_rgba(54,126,8,0.3)] ${isExpanded ? "h-[450px]" : hasImage ? "h-[430px]" : "h-[260px]"} w-11/12 md:w-full group gap-2 rounded-lg relative flex justify-end flex-col p-4 pt-6 z-50 overflow-hidden bg-gradient-to-b from-gray-800 to-gray-900 transition-all duration-300`}
-    >
-      {/* Background overlay */}
-      <div className="absolute inset-0 bg-black/20 rounded-lg" />
-
-      {/* Main content container */}
-      <div className="container text-white z-[2] relative font-nunito h-full flex flex-col py-4 gap-2">
-        {/* Image container - only show if image exists */}
-        {hasImage && (
-          <div className="h-[240px] mt-4 w-full flex flex-col justify-start rounded-lg overflow-hidden">
-            {image ? (
-              <Image
-                src={image}
-                alt={title || "Project image"}
-                width={512}
-                height={512}
-                className="h-full w-full object-fill object-top hover:scale-105 transition-transform duration-300"
-                priority
-              />
-            ) : (
-              <div className="h-full w-full bg-gray-700 flex items-center justify-center rounded-lg">
-                <span className="text-gray-400">No image available</span>
-              </div>
-            )}
-          </div>
+      <div className="flex flex-col gap-2">
+        <h2 className="text-lg font-extrabold leading-snug text-white">
+          {title}
+        </h2>
+        {role && (
+          <p className="text-xs font-medium tracking-wide text-[#CBACF9]/80">
+            {role}
+          </p>
         )}
-
-        {/* Title section */}
-        <div className={`h-fit w-full ${hasImage ? "mt-2" : "mt-4"}`}>
-          <Link target="_blank" href={link}>
-            <h1
-              className="card_heading text-xl tracking-[.2em] font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent drop-shadow-lg"
-              style={{
-                fontWeight: 900,
-                textShadow: "0 0 10px rgba(255,255,255,0.5)",
-              }}
-            >
-              {title}
-            </h1>
-          </Link>
-        </div>
-
-        {/* Technologies section */}
-        <div className="flex justify-start items-center h-fit w-full gap-2 flex-wrap">
-          {technologies && technologies.length > 0 ? (
-            technologies.map((tech, index) => (
-              <div
-                key={index}
-                className="border-2 border-white/80 rounded-lg text-white font-nunito text-sm font-medium px-3 py-1 hover:bg-white hover:text-gray-800 transition-all duration-300 cursor-pointer backdrop-blur-sm bg-white/10"
-              >
-                <p>{tech}</p>
-              </div>
-            ))
-          ) : (
-            <div className="text-gray-400 text-sm">
-              No technologies specified
-            </div>
-          )}
-        </div>
-
-        {/* Toggle button for all devices */}
-        <div className="flex justify-center mt-2">
-          <button
-            onClick={toggleExpanded}
-            className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/40 rounded-full px-4 py-2 text-white text-sm font-medium transition-all duration-300 flex items-center gap-2"
-          >
-            {isExpanded ? (
-              <>
-                Hide Details
-                <svg
-                  className="w-4 h-4 transform rotate-180 transition-transform duration-300"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </>
-            ) : (
-              <>
-                Show Details
-                <svg
-                  className="w-4 h-4 transition-transform duration-300"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </>
-            )}
-          </button>
-        </div>
       </div>
 
-      {/* Description section - expands on click */}
-      <div
-        className={`font-nunito text-white font-light relative ${isExpanded ? "h-[350px]" : "h-0"} leading-[1.4em] duration-500 overflow-hidden z-[3] bg-gradient-to-t from-gray-900/95 to-transparent p-4 rounded-b-lg`}
-      >
-        <p
-          className={`${isExpanded ? "flex" : "hidden"} transition-all duration-300 delay-200`}
+      {/* GitHub link */}
+      {link && (
+        <Link
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`View ${title} on GitHub`}
+          className="inline-flex w-fit items-center gap-1.5 rounded-lg border border-[#CBACF9]/30 bg-[#CBACF9]/10 px-3 py-1.5 text-xs font-semibold text-[#CBACF9] transition-colors duration-150 hover:bg-[#CBACF9]/20"
         >
-          {description || "No description available"}
-        </p>
-      </div>
-    </motion.div>
-  );
-};
+          <svg
+            className="h-3.5 w-3.5"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              fillRule="evenodd"
+              clipRule="evenodd"
+              d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.483 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.744 0 .268.18.579.688.481C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"
+            />
+          </svg>
+          GitHub
+        </Link>
+      )}
+    </div>
+
+    {/* ── Thin divider ── */}
+    <div className="hidden sm:block w-px self-stretch bg-gradient-to-b from-transparent via-[#CBACF9]/30 to-transparent" />
+
+    {/* ── Right zone: details ── */}
+    <div className="flex flex-col justify-between gap-4 bg-gradient-to-br from-[#0d1117] to-[#111827] p-6 sm:flex-1">
+      {description && (
+        <p className="text-sm leading-relaxed text-white/70">{description}</p>
+      )}
+
+      {/* Tech badges */}
+      {technologies && technologies.length > 0 && (
+        <div className="flex flex-wrap gap-2">
+          {technologies.map((tech) => (
+            <span
+              key={tech}
+              className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-xs font-medium text-white/60"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+  </article>
+);
 
 export default Card;

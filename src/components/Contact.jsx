@@ -1,53 +1,89 @@
-"use client"
-import { useState, useEffect, useRef } from "react"
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import emailJs from "@emailjs/browser"
-import { isValidEmail, getDomainPart, getLocalPart } from "email-js"
+"use client";
 
-gsap.registerPlugin(ScrollTrigger)
+import { useState } from "react";
 
-const FormElement = ({
-  contactForm, setContactForm, setLoading, loading
-}) => {
-  const handleChange = (e) => {
-    const { value, name } = e.target;
-    setContactForm(prev => ({ ...prev, [name]: value }))
-  }
+const inputCls =
+  "w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none focus:border-[#CBACF9]/60 focus:ring-1 focus:ring-[#CBACF9]/30 transition-colors duration-150";
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const FormElement = ({ contactForm, setContactForm, setLoading, loading }) => {
+  const handleChange = ({ target: { value, name } }) =>
+    setContactForm((prev) => ({ ...prev, [name]: value }));
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     setLoading(true);
-    emailJs.send("service_mnehd7q", "template_rywk01a",
-      {
-        from_name: contactForm.name,
-        to_name: "kharchi merouane",
-        message: contactForm.message,
-        email: contactForm.email,
-        company_name: contactForm.companyName,
-      }, "AXN0NM8BSmKr1TVYt").then((data) => {
-        setLoading(false)
-        alert("message sent")
-        setContactForm({
-          email: "",
-          name: "",
-          message: "",
-          companyName: "",
-        })
-      })
-  }
+    try {
+      const { default: emailJs } = await import("@emailjs/browser");
+      await emailJs.send(
+        "service_mnehd7q",
+        "template_rywk01a",
+        {
+          from_name: contactForm.name,
+          to_name: "kharchi merouane",
+          message: contactForm.message,
+          email: contactForm.email,
+          company_name: contactForm.companyName,
+        },
+        "AXN0NM8BSmKr1TVYt",
+      );
+      alert("Message sent");
+      setContactForm({ email: "", name: "", message: "", companyName: "" });
+    } catch {
+      alert("Unable to send the message. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <form onSubmit={handleSubmit} className=" w-full gap-4 h-full  flex flex-col items-center justify-center">
-      <h1 className="font-semibold text-xl bg-background rounded-lg px-2 py-2 sm:py-4 sm:-translate-y-3">Let's get in touch</h1>
-      <input value={contactForm.name} type="text" className="p-4 text-sm sm:text-lg border rounded-lg w-2/3" name="name" onChange={handleChange} placeholder="Enter your name" />
-      <input value={contactForm.companyName} type="text" className="p-4 text-sm sm:text-lg border rounded-lg w-2/3" name="companyName" onChange={handleChange} placeholder="Enter your company's name" />
-      <input value={contactForm.email} type="email" className="p-4 text-sm sm:text-lg border rounded-lg w-2/3" name="email" onChange={handleChange} placeholder="Enter your email" />
-      <textarea value={contactForm.message} placeholder="your message" className="pb-8 p-4 text-sm sm:text-lg border rounded-lg w-2/3" name="message" onChange={handleChange} />
-      <button className="w-2/3 px-4 py-2 row bg-[#CBACF9] text-background rounded-lg border" disabled={loading} type="Submit">{loading ? "submitting..." : "Submit"}</button>
+    <form onSubmit={handleSubmit} className="w-full flex flex-col gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <input
+          value={contactForm.name}
+          type="text"
+          name="name"
+          onChange={handleChange}
+          placeholder="Your name"
+          required
+          className={inputCls}
+        />
+        <input
+          value={contactForm.companyName}
+          type="text"
+          name="companyName"
+          onChange={handleChange}
+          placeholder="Company (optional)"
+          className={inputCls}
+        />
+      </div>
+      <input
+        value={contactForm.email}
+        type="email"
+        name="email"
+        onChange={handleChange}
+        placeholder="Your email"
+        required
+        className={inputCls}
+      />
+      <textarea
+        value={contactForm.message}
+        name="message"
+        onChange={handleChange}
+        placeholder="Your message"
+        required
+        rows={5}
+        className={`${inputCls} resize-none`}
+      />
+      <button
+        type="submit"
+        disabled={loading}
+        className="mt-1 w-full rounded-xl bg-[#CBACF9] py-3 text-sm font-semibold text-gray-900 transition-opacity duration-150 hover:opacity-90 disabled:opacity-50"
+      >
+        {loading ? "Sending…" : "Send message"}
+      </button>
     </form>
-  )
-}
+  );
+};
 
 const Contact = () => {
   const [loading, setLoading] = useState(false);
@@ -56,71 +92,31 @@ const Contact = () => {
     name: "",
     message: "",
     companyName: "",
-  })
-
-  const titleRef = useRef(null)
-  const containerRef = useRef(null)
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const titleElement = titleRef.current
-      if (titleElement) {
-        // Animate the entire title as one unit
-        gsap.fromTo(titleElement,
-          {
-            opacity: 0,
-            y: 100,
-            scale: 0.8
-          },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 1.2,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: "top 80%",
-              end: "bottom 20%",
-              toggleActions: "play none none reverse"
-            }
-          }
-        )
-
-        // Add special glow effect to the colored word "your"
-        const coloredSpan = titleElement.querySelector('.text-\\[\\#CBACF9\\]')
-        if (coloredSpan) {
-          gsap.to(coloredSpan, {
-            textShadow: "0 0 15px #CBACF9, 0 0 30px #CBACF9",
-            duration: 1.5,
-            ease: "power2.inOut",
-            yoyo: true,
-            repeat: -1,
-            delay: 1.5,
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: "top 80%",
-              end: "bottom 20%",
-              toggleActions: "play none none reverse"
-            }
-          })
-        }
-      }
-    }, containerRef)
-
-    return () => ctx.revert()
-  }, [])
+  });
 
   return (
-    <div ref={containerRef} className=" gap-10  my-20 w-full h-full min-h-screen mx-auto p-4  grid grid-cols-1 md:grid-cols-2 place-items-center">
-      
-      <div className="w-full h-full flex flex-col items-center md:items-end justify-center gap-6">
-        <h2 ref={titleRef} className="text-2xl  sm:text-4xl w-11/12  font-bold">
-        Ready to take <span className='text-[#CBACF9]'>your</span> digital presence to the next level?
-      </h2></div>
-      <FormElement contactForm={contactForm} loading={loading} setLoading={setLoading} setContactForm={setContactForm} />
-    </div>
-  )
-}
+    <div className="w-full min-h-screen mx-auto px-6  py-24 flex flex-col items-start justify-center gap-10 max-w-4xl">
+      {/* Heading block */}
+      <div className="flex text-center flex-col items-center w-full gap-2">
+        <h2 className="text-3xl sm:text-4xl font-bold text-white  leading-tight">
+          Ready to take{" "}
+          <span className="text-[#CBACF9]">your</span>{" "}
+          digital presence <br/> to the next level?
+        </h2>
+        <p className="mt-2 text-sm text-white/50 leading-relaxed">
+          Have a project in mind or just want to say hi? Fill in the form and I&apos;ll get back to you as soon as possible.
+        </p>
+      </div>
 
-export default Contact
+      {/* Form */}
+      <FormElement
+        contactForm={contactForm}
+        loading={loading}
+        setLoading={setLoading}
+        setContactForm={setContactForm}
+      />
+    </div>
+  );
+};
+
+export default Contact;
